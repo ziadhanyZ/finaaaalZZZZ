@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Book Galaxy | Sign Up</title>
+        <meta name="description" content="Website for books' information: (Author, Realease Date, etc...) and borrow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/SignUp.css' %}">
+    </head>
+
+    <body>
+        <nav class="navbar">
+            <a href="index"><h1>Book Galaxy</h1></a>
+            <div class="btn">
+                <a href="index" class="Home">Home</a>
+                <a href="login" class="login">Login</a>
+            </div>
+        </nav>
+        <hr>
+        <main>
+            <h1>Join Book Galaxy</h1>
+            <form method="post">
+                {% csrf_token %}
+                <h2>Create Account</h2>
+                <div class="names">
+                    <div class="First">
+                        <label for="First-name">First Name</label>
+                        <input type="text" placeholder="First Name" name="Fname" id="First-name" required>
+                    </div>
+                    <div class="Last">
+                        <label for="Last-name">Last Name</label>
+                        <input type="text" placeholder="Last Name" name="Lname" id="Last-name" required>
+                    </div>
+                </div>
+                <div class="userName">
+                    <label for="user-name">Username</label>
+                    <input type="text" placeholder="Username" name="username" id="user-name" required>
+                </div>
+                <div class="Email">
+                    <label for="email">Email</label>
+                    <input type="email" placeholder="Email" name="email" id="email" required>
+                </div>
+                <label>Password</label>
+                <div class="pwds">
+                    <div class="pass">
+                        <input type="password" placeholder="Password" name="Pass" id="Pass" required>
+                    </div>
+                    <div class="confirm">
+                        <input type="password" placeholder="Confirm Password" name="confirm" id="confirm" required>
+                    </div>
+                </div>
+                <div class="role">
+                    <label>Gender:</label>
+                    <label><input type="radio" name="gender" value="Male">Male</label>
+                    <label><input type="radio" name="gender" value="Female">Female</label>
+                </div>
+                <div class="Type">
+                    <label>Type:</label>
+                    <label><input type="radio" name="role" value="user">User</label>
+                    <label><input type="radio" name="role" value="admin">Admin</label>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div id="signup-error">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div>
+                    <button class="CreateB" type="submit">Sign Up</button>
+                </div>
+                <p>Already have an Account? <a href="login">Login</a></p>
+            </form>
+        </main>
+        <script src="{% static 'js/Signup.js' %}"></script>
+    </body>
+</html>

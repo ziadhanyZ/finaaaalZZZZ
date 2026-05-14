@@ -1,0 +1,67 @@
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'books/borrowed_books.css' %}">
+
+<nav>
+    <a href="{% url 'index' %}">Home</a> |
+    <a href="{% url 'view_books' %}">Books</a> |
+    <a href="{% url 'my_borrows' %}">Borrowed Books</a> |
+    <a href="{% url 'add_book_page' %}">Add Book</a> |
+    <a href="{% url 'manage_book' %}">Manage Books</a> 
+</nav>
+<hr>
+<h1>My Borrowed Books</h1>
+
+<table class="main_table">
+    <thead class="table_head">
+        <tr>
+            <th>Cover</th>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Borrow Date</th>
+            <th>Due Date</th>
+            <th>Time Left</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody class="table_body">
+        {% if records %}
+            {% for record in records %}
+            <tr>
+                <td><img src="{{ record.book.image }}" width="50"></td>
+                <td>{{ record.book.name }}</td>
+                <td>{{ record.book.author }}</td>
+                <td>{{ record.book.category }}</td>
+                <td>{{ record.borrowed_at|date:"M d, Y" }}</td>
+                <td>{{ record.due_date|date:"M d, Y" }}</td>
+                <td>
+                    {% if record.is_overdue %}
+                        <span style="color:red">Expired</span>
+                    {% else %}
+                        {{ record.due_date|timeuntil }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if record.is_active %}
+                    <form method="POST" action="{% url 'return_book' record.book.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Return</button>
+                    </form>
+                    {% else %}
+                        Returned
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="8">You have no borrowed books.</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+{% endblock %}

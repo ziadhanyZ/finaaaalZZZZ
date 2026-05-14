@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Books</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'books/manage_book.css' %}">
+</head>
+<body>
+
+<nav>
+    <a href="{% url 'index' %}">Home</a> |
+    <a href="{% url 'view_books' %}">Books</a> |
+    <a href="{% url 'my_borrows' %}">Borrowed Books</a> |
+    <a href="{% url 'login' %}">Login</a> |
+    <a href="{% url 'SignUp' %}">Sign Up</a> |
+    <a href="{% url 'add_book_page' %}">Add Book</a> |
+    <a href="{% url 'manage_book' %}">Manage Books</a>
+</nav>
+<hr>
+
+<!-- CSRF token for JS fetch requests -->
+{% csrf_token %}
+
+<h1>Manage Books</h1>
+
+<div id="tableContainer">
+
+    <div id="sortRow">
+        <label for="sortSelect">Sort by:</label>
+        <select id="sortSelect" onchange="renderTable()">
+            <option value="newest">Newest to Oldest</option>
+            <option value="oldest">Oldest to Newest</option>
+            <option value="az">Name A - Z</option>
+            <option value="za">Name Z - A</option>
+            <option value="categoryAZ">Category A - Z</option>
+            <option value="categoryZA">Category Z - A</option>
+        </select>
+    </div>
+
+    <table id="booksTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="booksTableBody">
+        </tbody>
+    </table>
+
+    <p id="noBooksMessage" style="display:none; text-align:center; color:#888; margin-top:20px;">No books found.</p>
+</div>
+
+<!-- Delete Modal -->
+<div id="deleteModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+        <p id="deleteWarningText"></p>
+        <div class="modal-actions">
+            <button class="yes-btn" onclick="confirmDelete()">Yes</button>
+            <button class="no-btn" onclick="closeDeleteModal()">No</button>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div id="editModal" class="modal-overlay" style="display:none;">
+    <div id="editForm">
+        <h2>Edit Book</h2>
+
+        <label>Name:</label><br>
+        <input type="text" id="editName"><br><br>
+
+        <label>Author:</label><br>
+        <input type="text" id="editAuthor"><br><br>
+
+        <label>Category:</label><br>
+        <select id="editCategory">
+            <option value="" disabled>Select Category</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Historical">Historical</option>
+            <option value="Programming">Programming</option>
+            <option value="Romantic">Romantic</option>
+            <option value="Science Fiction">Science Fiction</option>
+        </select><br><br>
+
+        <label>Description:</label><br>
+        <textarea id="editDescription" rows="4" cols="40"></textarea><br><br>
+
+        <label>Image URL:</label><br>
+        <input type="text" id="editImage"><br><br>
+
+        <button class="apply-btn" onclick="applyChanges()">Apply</button>
+        <button class="cancel-btn" onclick="cancelEdit()">Cancel</button>
+
+        <p id="editMessage"></p>
+    </div>
+</div>
+
+<script src="{% static 'books/manage_book.js' %}"></script>
+</body>
+</html>

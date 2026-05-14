@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Book Galaxy| Login</title>
+        <meta name="description" content="Website for books' information: (Author, Realease Date, etc...) and borrow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/loginstyle.css' %}">
+    </head>
+
+    <body>
+       <nav class="navbar">
+            <a href="index"><h1>Book Galaxy</h1></a>
+            <div class="btn">
+                <a href="index" class="Home">Home</a>
+                <a href="SignUp" class="Signup">Sign Up</a>
+            </div>
+        </nav>
+        <hr>
+        <h1 class="statment">Welcome Back!</h1>
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                <h2>Login</h2>
+                <div class="username">
+                    <label for="username">Username</label>
+                    <input type="text" placeholder="Username" id="username" name="username" required>
+                </div>
+                <div class="pwd">
+                    <label for="Pass">Password</label>
+                    <input type="password" placeholder="Password" id="Pass" name="Pass" required>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div id="login-error" style="color:#e84c3d; text-align:center; font-weight:700;
+                                    background:rgba(232,76,61,0.08); padding:10px 16px;
+                                    border-radius:12px; border:1.5px solid rgba(232,76,61,0.3);
+                                    margin-bottom:12px;">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div>
+                    <button type="submit">Login</button>
+                </div>
+                <p style="text-align: center; color: #C08552; margin-bottom: 0px;">Don't have an account? <a href="SignUp">Sign Up</a></p>
+            </form>
+        </div>
+        <script src="{% static 'js/Login.js' %}"></script>
+    </body>
+</html>

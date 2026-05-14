@@ -1,0 +1,316 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: linear-gradient(to bottom, #12081f, #1d1033, #2b1450);
+    overflow-x: hidden;
+}
+
+/* stars */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 120px 120px;
+    opacity: 0.15;
+    z-index: -1;
+}
+
+/* NAVBAR */
+nav {
+    width: 90%;
+    margin: 20px auto;
+    padding: 18px;
+    border-radius: 20px;
+    text-align: center;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    margin: 0 10px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    background: rgba(180,120,255,0.2);
+    color: #d8b4ff;
+}
+
+hr {
+    display: none;
+}
+
+/* TITLE */
+h1 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 42px;
+    color: #f3e8ff;
+}
+
+/* TABLE CONTAINER */
+#tableContainer {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 25px rgba(147,51,234,0.15);
+}
+
+/* SORT ROW */
+#sortRow {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#sortRow label {
+    color: #e9d5ff;
+    font-size: 14px;
+}
+
+#sortSelect {
+    padding: 10px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(0,0,0,0.2);
+    color: white;
+    outline: none;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#sortSelect:focus {
+    border-color: #9333ea;
+    box-shadow: 0 0 12px rgba(147,51,234,0.3);
+}
+
+/* TABLE */
+#booksTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#booksTable thead tr {
+    background: rgba(147,51,234,0.25);
+}
+
+#booksTable th {
+    padding: 12px 15px;
+    text-align: left;
+    color: #e9d5ff;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+#booksTable td {
+    padding: 12px 15px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: #f3e8ff;
+}
+
+#booksTable tbody tr:hover {
+    background: rgba(147,51,234,0.1);
+    transition: 0.2s;
+}
+
+/* BUTTONS */
+.edit-btn, .delete-btn {
+    padding: 7px 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.edit-btn {
+    background: #9333ea;
+    color: white;
+    margin-right: 6px;
+}
+
+.edit-btn:hover {
+    background: #a855f7;
+    box-shadow: 0 0 12px rgba(192,132,252,0.4);
+    transform: scale(1.03);
+}
+
+.delete-btn {
+    background: rgba(220,38,38,0.7);
+    color: white;
+}
+
+.delete-btn:hover {
+    background: rgba(239,68,68,0.9);
+    box-shadow: 0 0 12px rgba(239,68,68,0.4);
+    transform: scale(1.03);
+}
+
+/* MODALS */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* DELETE MODAL */
+.modal-box {
+    background: rgba(29,16,51,0.95);
+    border: 1px solid rgba(147,51,234,0.3);
+    border-radius: 20px;
+    padding: 30px 40px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(147,51,234,0.2);
+}
+
+.modal-box p {
+    color: #e9d5ff;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.yes-btn, .no-btn {
+    padding: 10px 28px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.yes-btn {
+    background: rgba(220,38,38,0.8);
+    color: white;
+}
+
+.yes-btn:hover {
+    background: rgba(239,68,68,1);
+    box-shadow: 0 0 12px rgba(239,68,68,0.4);
+}
+
+.no-btn {
+    background: #9333ea;
+    color: white;
+}
+
+.no-btn:hover {
+    background: #a855f7;
+    box-shadow: 0 0 12px rgba(192,132,252,0.4);
+}
+
+/* EDIT MODAL */
+#editForm {
+    background: rgba(29,16,51,0.95);
+    border: 1px solid rgba(147,51,234,0.3);
+    border-radius: 25px;
+    padding: 30px 40px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 0 30px rgba(147,51,234,0.2);
+}
+
+#editForm h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #f3e8ff;
+    font-size: 26px;
+}
+
+#editForm label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    color: #e9d5ff;
+    font-size: 14px;
+}
+
+#editForm input,
+#editForm select,
+#editForm textarea {
+    width: 100%;
+    padding: 11px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(0,0,0,0.2);
+    color: white;
+    outline: none;
+    transition: 0.3s;
+}
+
+#editForm input:focus,
+#editForm select:focus,
+#editForm textarea:focus {
+    border-color: #9333ea;
+    box-shadow: 0 0 12px rgba(147,51,234,0.3);
+}
+
+#editForm textarea {
+    resize: none;
+}
+
+.apply-btn, .cancel-btn {
+    margin-top: 20px;
+    padding: 11px 0;
+    width: 48%;
+    border: none;
+    border-radius: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.apply-btn {
+    background: #9333ea;
+    color: white;
+    margin-right: 4%;
+}
+
+.apply-btn:hover {
+    background: #a855f7;
+    box-shadow: 0 0 15px rgba(192,132,252,0.5);
+    transform: scale(1.02);
+}
+
+.cancel-btn {
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+#editMessage {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 14px;
+}

@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+    <link rel="stylesheet" href="{% static 'books/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'books/add_book.css' %}">
+</head>
+
+<script src="{% static 'books/view_book.js' %}"></script>
+</head>
+<body>
+
+<nav>
+    <a href="{% url 'index' %}">Home</a> |
+    <a href="{% url 'view_books' %}">Books</a> |
+    <a href="{% url 'my_borrows' %}">Borrowed Books</a> |
+    <a href="{% url 'add_book_page' %}">Add Book</a> |
+    <a href="{% url 'manage_book' %}">Manage Books</a> 
+</nav>
+<hr>
+
+<h2>Add New Book</h2>
+<form id="addBookForm">
+    <label>Book ID</label>
+    <input type="number" id="bookId"><br>
+
+    <label>Book Name</label>
+    <input type="text" id="bookName" required><br>
+
+    <label>Author</label>
+    <input type="text" id="author" required><br>
+
+    <label>Category</label>
+    <select name="category" id="category" required>
+        <option value="" disabled selected>Select Category</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Historical">Historical</option>
+        <option value="Programming">Programming</option>
+        <option value="Romantic">Romantic</option>
+        <option value="Science Fiction">Science Fiction</option>
+    </select><br>
+
+    <label>Description</label>
+    <textarea id="description" required></textarea><br>
+    
+    <label for="book_image">Book Image:</label>
+    <input type="text" id="book_image" placeholder="Enter image link"><br><br>
+    
+    <input type="submit" value="Add Book">
+</form>
+
+<script src="{% static 'books/add_book.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: linear-gradient(to bottom, #12081f, #1d1033, #2b1450);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* stars */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 120px 120px;
+    opacity: 0.15;
+    z-index: -1;
+}
+
+/* NAV */
+.navbar {
+    width: 92%;
+    margin-top: 20px;
+    padding: 18px 25px;
+
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    background: rgba(180,120,255,0.2);
+    color: #d8b4ff;
+}
+
+/* TITLE */
+.statment {
+    margin-top: 40px;
+    font-size: 40px;
+    color: #f3e8ff;
+}
+
+/* FORM CARD */
+form {
+    width: 90%;
+    max-width: 420px;
+    margin-top: 30px;
+    padding: 25px;
+
+    border-radius: 25px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+
+    box-shadow: 0 0 25px rgba(147,51,234,0.15);
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form h2 {
+    text-align: center;
+    color: #f3e8ff;
+}
+
+/* labels */
+label {
+    color: #e9d5ff;
+    font-size: 14px;
+}
+
+/* inputs */
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(0,0,0,0.2);
+    color: white;
+
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #9333ea;
+    box-shadow: 0 0 12px rgba(147,51,234,0.3);
+}
+
+/* button */
+button {
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 14px;
+
+    background: #9333ea;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #a855f7;
+    box-shadow: 0 0 15px rgba(192,132,252,0.5);
+}
+
+/* error message override (IMPORTANT) */
+#login-error {
+    color: #ff6b6b !important;
+    text-align: center;
+    font-weight: bold;
+
+    background: rgba(255, 0, 0, 0.08);
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 0, 0, 0.2);
+}

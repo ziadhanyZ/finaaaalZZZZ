@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Details</title>
+    <link rel="stylesheet" href="{% static 'books/style.css' %}">
+    <link rel="stylesheet" href="{% static 'books/book_details.css' %}">
+    <link rel="stylesheet" href="{% static 'books/navbar.css' %}">
+</head>
+<body>
+
+<nav>
+    <a href="{% url 'index' %}">Home</a> |
+    <a href="{% url 'view_books' %}">Books</a> |
+    <a href="{% url 'my_borrows' %}">Borrowed Books</a> |
+    <a href="{% url 'add_book_page' %}">Add Book</a> |
+    <a href="{% url 'manage_book' %}">Manage Books</a> 
+</nav>
+<hr>
+
+<div class="details-container">
+    <div class="book-details">
+        <button class="back-btn" onclick="window.location.href='/books/'">← Back to Books</button>
+        
+        <div class="details-content">
+            <div class="book-image">
+                <img id="bookImage" src="" alt="Book Cover">
+            </div>
+
+            <div class="details-info">
+                <h1 id="bookTitle">Loading...</h1>
+                
+                <div class="detail-item">
+                    <label>Author:</label>
+                    <p id="bookAuthor"></p>
+                </div>
+
+                <div class="detail-item">
+                    <label>Category:</label>
+                    <p id="bookCategory"></p>
+                </div>
+
+                <div class="detail-item">
+                    <label>Description:</label>
+                    <p id="bookDescription"></p>
+                </div>
+
+        {% if user.is_authenticated %}
+            {% if book.isBorrowed %}
+                <button disabled style="opacity:0.5;">Not Available</button>
+            {% else %}
+                <form method="POST" action="{% url 'borrow_book' book.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Borrow</button>
+                </form>
+            {% endif %}
+        {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'books/book_details.js' %}"></script>
+
+</body>
+</html>

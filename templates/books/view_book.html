@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReadSpace - Books</title>
+    <link rel="stylesheet" href="{% static 'books/style.css' %}?v=1.1">
+    <link rel="stylesheet" href="{% static 'books/navbar.css' %}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+<nav>
+    <a href="{% url 'index' %}">Home</a> |
+    <a href="{% url 'view_books' %}">Books</a> 
+
+    {% if user.is_staff %}
+        | <a href="{% url 'add_book_page' %}">Add Book</a> |
+        <a href="{% url 'manage_book' %}">Manage Books</a> 
+        
+    {% else %}
+        | <a href="{% url 'my_borrows' %}">Borrowed Books</a>
+    {% endif %}
+</nav>
+<hr>
+
+<center>
+    <h1><i>Book Galaxy</i></h1>
+    
+    <div class="galaxy-search-container">
+        <input type="text" 
+               id="searchInput" 
+               class="galaxy-search-input"
+               onkeyup="performSearch()" 
+               placeholder="Search by name or author..." 
+               autocomplete="off">
+               
+        <button onclick="performSearch()" class="galaxy-search-btn" title="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+</center>
+
+<div id="categoryContainer"></div>
+
+<script>
+
+    const isAdmin = {{ user.is_authenticated|yesno:"true,false" }} && {{ user.is_staff|yesno:"true,false"}};
+</script>
+
+<script src="{% static 'books/view_book.js' %}"></script>
+
+</body>
+</html>
+
+</body>
+</html>

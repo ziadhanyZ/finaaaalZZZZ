@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel = "stylesheet" href = "index.css">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+        <title>Book Galaxy</title>
+    </head>
+
+    <body>
+<nav>
+    <a href="{% url 'index' %}">Home</a> |
+    <a href="{% url 'view_books' %}">Books</a> |
+    <a href="{% url 'my_borrows' %}">Borrowed Books</a> |
+    <a href="{% url 'login' %}">Login</a> |
+    <a href="{% url 'SignUp' %}">Sign Up</a> |
+    <a href="{% url 'add_book_page' %}">Add Book</a> |
+    <a href="{% url 'manage_book' %}">Manage Books</a> 
+</nav>
+        <hr>
+        <center>
+            <h1 class = "site-name"><em>Book Galaxy</em></h1>
+            <i style="color: #2d4594;"><h2>"While (Alive) { Read, Learn and Grow }"</i></h2>
+            <p>Welcome,Ready to dive into a new world?</p>
+        </center>
+    </body>
+
+</html>
