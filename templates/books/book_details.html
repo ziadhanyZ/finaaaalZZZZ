@@ -45,18 +45,6 @@
                     <label>Description:</label>
                     <p id="bookDescription"></p>
                 </div>
-
-        {% if user.is_authenticated %}
-            {% if book.isBorrowed %}
-                <button disabled style="opacity:0.5;">Not Available</button>
-            {% else %}
-                <form method="POST" action="{% url 'borrow_book' book.id %}">
-                    {% csrf_token %}
-                    <button type="submit">Borrow</button>
-                </form>
-            {% endif %}
-        {% endif %}
-
             </div>
         </div>
     </div>
